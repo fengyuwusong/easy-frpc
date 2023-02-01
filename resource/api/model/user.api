@@ -1,0 +1,97 @@
+syntax = "v1"
+
+info(
+    title: "user model"
+    desc: "user model"
+    author: "fyws"
+    email: "fyws@fengyuwusong.cn"
+    version: "0.1.0"
+)
+
+type User {
+    ID int `json:"id"`
+    Username string `json:"username"`
+    NickName string `json:"nickname"`
+    Password string `json:"password"`
+    LastLoginTime int `json:"last_login_time"`
+    UpdateTime int `json:"update_time"`
+    CreateTime int `json:"create_time"`
+    CreateUserID int `json:"create_user_id"`
+    RoleID int `json:"role_id"`
+}
+
+type UserWithoutPassword {
+    ID int `json:"id"`
+    Username string `json:"username"`
+    NickName string `json:"nickname"`
+    Password string `json:"password"`
+    LastLoginTime int `json:"last_login_time"`
+    UpdateTime int `json:"update_time"`
+    CreateTime int `json:"create_time"`
+    CreateUserID int `json:"create_user_id"`
+    RoleID int `json:"role_id"`
+}
+
+type (
+    LoginRequest {
+        Username string `json:"username"`
+        Password string `json:"password"`
+    }
+
+    LoginResponse {
+        Code uint8 `json:"code"`
+        Msg string `json:"msg"`
+        Data UserWithoutPassword `json:"data"`
+    }
+)
+
+type (
+    CreateUserRequest {
+        UserName string `json:"user_name"`
+        NickName string `json:"nick_name"`
+        Password string `json:"password"`
+        RoleID int `json:"role_id"`
+    }
+
+    CreateUserResponse {
+        Code uint8 `json:"code"`
+        Msg string `json:"msg"`
+        Data UserWithoutPassword `json:"data"`
+    }
+)
+
+type (
+    UpdateUserRequest {
+        UserID int `path:"userid"`
+        UserName string `json:"user_name,optional"`
+        Password string `json:"password,optional"`
+        NickName string `json:"nick_name,optional"`
+        RoleID int `json:"role_id,optional"`
+    }
+    UpdateUserResponse {
+        Code uint8 `json:"code"`
+        Msg string `json:"msg"`
+        Data UserWithoutPassword `json:"data"`
+    }
+)
+
+type (
+    DeleteUserRequest {
+        UserID int `path:"userid"`
+    }
+    DeleteUserResponse {
+        Code uint8 `json:"code"`
+        Msg string `json:"msg"`
+    }
+)
+type (
+    GetUsersRequest {
+        Page int `query:"page"`
+        Offset int `query:"offset"`
+    }
+    GetUsersResponse {
+        Code uint8 `json:"code"`
+        Msg string `json:"msg"`
+        Data []UserWithoutPassword `json:"data"`
+    }
+)

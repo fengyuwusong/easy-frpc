@@ -1,0 +1,38 @@
+syntax = "v1"
+
+info(
+    title: "role model"
+    desc: "role model"
+    author: "fengyuwusong"
+    email: "fyws@fengyuwusong.cn"
+    version: "0.1.0"
+)
+
+type Role {
+    ID int `json:"id"`
+    Name string `json:"name"`
+    CreateUserID int `json:"create_user_id"`
+    CreateTime int `json:"create_time"`
+    UpdateTime int `json:"update_time"`
+    PowerIDS []int `json:"power_ids"`
+}
+
+type (
+    GetRolesResponse {
+        Code int `json:"code"`
+        Msg string `json:"msg"`
+        Data []Role `json:"data"`
+    }
+)
+
+type (
+    CreateRoleRequest {
+        Name string `json:"name"`
+        PowerIDS int `json:"power_ids"`
+    }
+    CreateRoleResponse {
+        Code int `json:"code"`
+        Msg string `json:"msg"`
+        Data Role `json:"data"`
+    }
+)

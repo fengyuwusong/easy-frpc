@@ -1,0 +1,25 @@
+syntax = "v1"
+
+info(
+    title: "power model"
+    desc: "power model"
+    author: "fengyuwusong"
+    email: "fyws@fengyuwusong.cn"
+    version: "0.1.0"
+)
+
+type Power {
+    ID int `json:"id"`
+    Name string `json:"name"`
+    Method string `json:"method"`
+    URI string `json:"uri"`
+    CreateTime int `json:"create_time"`
+}
+
+type (
+    GetPowersResponse {
+        Code int `json:"code"`
+        Msg string `json:"msg"`
+        Data []Power `json:"data"`
+    }
+)

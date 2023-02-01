@@ -1,0 +1,20 @@
+syntax = "v1"
+
+info(
+    title: "config model"
+    desc: "config model"
+    author: "fyws"
+    email: "fyws@fengyuwusong.cn"
+    version: "0.1.0"
+)
+
+type ConfigResponse {
+    Code int `json:"code"`
+    Msg string `json:"msg"`
+}
+
+type (
+    UpdateCommonConfigRequest {
+        // frpc 基础设置
+    }
+)

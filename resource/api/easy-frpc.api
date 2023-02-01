@@ -1,0 +1,78 @@
+syntax = "v1"
+
+info(
+    title: "easy frpc service"
+    desc: "easy frpc service"
+    author: "fengyuwusong"
+    email: "fyws@fengyuwusong.cn"
+    version: "0.1.0"
+)
+
+import (
+    "model/user.api"
+    "model/power.api"
+    "model/role.api"
+    "model/frpc-config.api"
+)
+
+@server(
+    prefix: api/v1
+    group: user
+)
+
+service EasyFrpc {
+    @doc "user login"
+    @handler login
+    post /user/login (LoginRequest) returns (LoginResponse)
+}
+
+@server(
+    prefix: api/v1
+    middleware: AuthMiddleware
+    group: user
+)
+
+service EasyFrpc {
+    @doc "create a new user"
+    @handler createUser
+    post /user/:userid (CreateUserRequest) returns (CreateUserResponse)
+    @doc "update a user"
+    @handler updateUser
+    put /user/:userid (UpdateUserRequest) returns (UpdateUserResponse)
+    @doc "get user list"
+    @handler getUsers
+    get /users (GetUsersRequest) returns (GetUsersResponse)
+    @doc "delete a user"
+    @handler deleteUser
+    delete /user/:userid (DeleteUserRequest) returns (DeleteUserResponse)
+}
+
+@server(
+    prefix: api/v1
+    middleware: AuthMiddleware
+    group: role
+)
+
+service EasyFrpc {
+    @doc "create a new role"
+    @handler createRole
+    post /role (CreateRoleRequest) returns (CreateRoleResponse)
+    @doc "get role list"
+    @handler getRoles
+    get /roles returns (GetRolesResponse)
+}
+
+@server(
+    prefix: api/v1/frpc
+    middleware: AuthMiddleware
+    group: config
+)
+
+service EasyFrpc {
+    @doc "get all frpc config"
+    @handler getFrpcConfig
+    get /fprc/config returns (ConfigResponse)
+    @doc "update common frpc config"
+    @handler updateFprcCommonConfig
+    put /frpc/config/common (UpdateCommonConfigRequest) returns (ConfigResponse)
+}
